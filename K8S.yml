@@ -1,0 +1,53 @@
+sudo systemctl list-units --type=service
+
+Host list show :- #cat /etc/hosts
+Status of hosts:- #netstat -rn
+status of selinux:-#sestatus
+desable selinux:- #sudo setenforce 0
+open selinux:-#cat /etc/selinux/config
+desable selinux:-#vi /etc/selinux/config
+check firewalld:-#systemctl satus firewalld
+Add K8S repo:-#vi /etc/yum.repos.d/kubernetes.repo
+Add files :- 
+[kubernetes]
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
+       https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+
+start services:-#for i in docker kubelet
+output:- > do
+	 > systemctl start $i; systemctl enable $i
+	 > done
+disable swap:-#vi /etc/fstab
+	    :-#swapoff -a
+check swap status:-#free -h
+
+open sysctl file:-#vi /etc/sysctl.conf
+add file :- net.bridge.bridge-nf-call-ip6tables = 1
+	    net.bridge.bridge-nf-call-iptables = 1
+
+check files are add:-#sysctl -p ---> it adding files
+kubeadm intialazation:-#kubeadm init --pod-network-cidr=172.30.0.0/16
+Note:- It should be generate impotant file those are below 
+        [kubeconfig] Using kubeconfig folder "/etc/kubernetes"
+	[kubeconfig] Writing "admin.conf" kubeconfig file
+	[kubeconfig] Writing "kubelet.conf" kubeconfig file
+	[kubeconfig] Writing "controller-manager.conf" kubeconfig file
+	[kubeconfig] Writing "scheduler.conf" kubeconfig file
+
+watch docker images every sec:-watch -n1 docker images
+
+make directory :-#mkdir -p $HOME/.kube
+
+copy files :-#sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+             #sudo chown $(id -u):$(id -g) $HOME/.kube/config
+apply flannel:-#kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+
+check cluster is ready state:- #kubectl get pods --all-namespaces
+check cluster details of flannel:-kubectl describe pods kube-flannel-ds-6ll6v --namespace=kube-system
+check flannel network is created or not:-#ip a
+
+--------------------------------------Successful To create a kubernetes cluster----------------------------------------------
