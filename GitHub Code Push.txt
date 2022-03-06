@@ -1,0 +1,57 @@
+----------------------------------------------------GitHub-----------------------------------------------
+
+Step 1:-
+--------
+Create a directory:-$mkdir name of directory
+
+Step 2:-
+--------
+In that Dir create a files:- like .txt & .yml.which file you want to push GitHub.
+
+Step 3:-
+--------
+configare git hub with username:-$git config --global user.name "Username of GitHub"
+
+Step 4:-
+--------
+configare git hub with E-mail:-$git config --global user.email "E-mail Id of GitHub"
+
+Step 5:-
+--------
+check email is which Id present:-$git config --global user.email
+
+Step 6:-
+--------
+check Username :-$git config --global --edit
+
+Step 7:-
+--------
+To intialiaze :-$git init
+
+Step 8:-
+--------
+check Any files present in DIR:-$ls -a
+
+Step 9:-
+--------
+Check status of git:-$git status
+
+Step 10:-
+---------
+Adding files to Unstage area to staged area:-$git add file name (or) $git add .
+
+Step 11:-
+---------
+all modifications done then commit code:-$git commit -m "initial commit(any message)"
+
+Step 12:-
+---------
+check logs if code commit (or) not:-$git log
+
+Step 13:-
+---------
+Add remote location of github:-$git remote add origin URL of Repo(e.g:-https://github.com/username/commands-execution.git)
+
+Step 14:-
+---------
+To push the code to GitHub:-$git push -u origin master
