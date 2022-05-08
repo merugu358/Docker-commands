@@ -7,7 +7,7 @@ pipeline {
         stage('SCM-Checkout') { 
             steps {
                 git branch: 'main', credentialsId: 'git-hub-credentials', 
-				url: 'https://github.com/vikas99341/K8S-pipeline.git' 
+				url: 'https://github.com/merugu358/K8S-pipeline.git' 
             }
         }
         stage('Maven-Clean-Compile') { 
@@ -22,15 +22,15 @@ pipeline {
         }
         stage('Docker-build') { 
             steps {
-                sh 'docker build . -t vikas24775/jenkins-tomcat:9.0 ' 
+                sh 'docker build . -t merugu358/jenkins-tomcat:9.0 ' 
             }
         }
         stage('Docker-push') { 
             steps {
 				withCredentials([string(credentialsId: 'dockerHubPwd', variable: 'dockerHubPwd')]) {
-					sh 'docker login -u vikas24775 -p ${dockerHubPwd}'
+					sh 'docker login -u merugu358 -p ${dockerHubPwd}'
 				}
-                sh 'docker push vikas24775/jenkins-tomcat:9.0 ' 
+                sh 'docker push merugu358/jenkins-tomcat:9.0 ' 
             }
         }
     }
