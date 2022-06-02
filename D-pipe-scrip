@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+    tools {
+        maven 'Maven home'
+        }
+    stages {
+        stage('SCM-Checkout') { 
+            steps {
+                git branch: 'main', credentialsId: 'git-hub-cerdentials',
+                url: 'https://github.com/merugu358/Docker-commands.git' 
+            }
+        }
+        stage('Maven-Clean-Compile') { 
+            steps {
+                sh 'mvn clean compile'	  
+            }
+        }
+        stage('Maven-Package') { 
+            steps {
+                sh 'mvn package'  
+            }
+        }
+    }
+}
