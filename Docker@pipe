@@ -1,4 +1,4 @@
-pipeline {
+ pipeline {
     agent any
     tools {
 		maven 'Maven home'
@@ -33,15 +33,14 @@ pipeline {
         }
         stage('Deploy to k8s'){
             steps{
-              sh "chmod +x achangeTag.sh"
+              sh "chmod +x changeTag.sh"
               sh "./changeTag.sh ${DOCKER_TAG}"
-			  sshagent(['kops-machine']) {
-					sh "scp -o StrictHostKeyChecking=no services.yml node-app-pod.yml ec2-user@54.198.142.180:/home/ec2-user"
-                    sh "ssh ec2-user@54.198.142.180 kubectl apply -f ."
+			  sshagent(['K8S-Mgmt-Node']) {
+					sh "scp -o StrictHostKeyChecking=no services.yml node-app-pod.yml ec2-user@54.208.14.246:/home/ec2-user"
+                    sh "ssh ec2-user@54.208.14.246 kubectl apply -f ."
 				}
             }
         }
-
     }
 }
 def getVersion(){
