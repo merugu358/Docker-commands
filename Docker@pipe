@@ -10,7 +10,7 @@ pipeline {
         stage('SCM Checkout') {
             steps {
                 git branch: 'main', credentialsId: 'git-hub-credentials', 
-				url: 'https://github.com/merugu358/Docker-commands.git'
+				url: 'https://github.com/vikas99341/K8S-pipeline.git'
             }
         }
         stage('Maven-Steps') {
@@ -20,18 +20,18 @@ pipeline {
         }
         stage('Docker-Build') {
             steps {
-				sh 'docker build . -t merugu358/nodeapp:${DOCKER_TAG}'
+				sh 'docker build . -t vikas24775/nodeapp:${DOCKER_TAG}'
             }
         }
         stage('Docker-Push') {
             steps {
 				withCredentials([string(credentialsId: 'dockerHubPwd', variable: 'dockerHubPwd')]) {
-					sh 'docker login -u merugu358 -p ${dockerHubPwd}'
+					sh 'docker login -u vikas24775 -p ${dockerHubPwd}'
 				}
-			sh 'docker push merugu358/nodeapp:${DOCKER_TAG}'
+			sh 'docker push vikas24775/nodeapp:${DOCKER_TAG}'
             }
         }
-        stage('Deploy to Docker-commands'){
+        stage('Deploy to k8s'){
             steps{
               sh "chmod +x achangeTag.sh"
               sh "./changeTag.sh ${DOCKER_TAG}"
